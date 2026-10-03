@@ -1,0 +1,7 @@
+// SPDX-License-Identifier: Apache-2.0
+android_library {
+    name: "sm8150_tablet_settings_defaults",
+    resource_dirs: ["res"],
+    manifest: "AndroidManifest.xml",
+    platform_apis: true,
+}

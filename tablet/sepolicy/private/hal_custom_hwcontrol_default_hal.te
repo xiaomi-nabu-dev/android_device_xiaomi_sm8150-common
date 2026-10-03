@@ -1,0 +1,12 @@
+type hal_custom_hwcontrol_default, domain, coredomain;
+hal_attribute(custom_hwcontrol)
+
+hal_server_domain(hal_custom_hwcontrol_default, hal_custom_hwcontrol)
+
+type hal_custom_hwcontrol_default_exec, exec_type, system_file_type, file_type;
+init_daemon_domain(hal_custom_hwcontrol_default)
+
+binder_call(hal_custom_hwcontrol_default, servicemanager);
+
+get_prop(hal_custom_hwcontrol_default, sm8150_tablet_config_prop)
+allow hal_custom_hwcontrol_default sysfs_type:dir search;

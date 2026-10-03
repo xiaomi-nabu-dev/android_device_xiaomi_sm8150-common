@@ -388,21 +388,18 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Perf
 PRODUCT_PACKAGES += \
-    $(if $(filter true,$(TARGET_IS_TABLET)),,libqti-perfd-client)
+    libqti-perfd-client
 
-ifneq ($(TARGET_IS_TABLET),true)
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service.xiaomi-libperfmgr
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+    $(if $(TARGET_POWER_HINT_CONFIG),$(TARGET_POWER_HINT_CONFIG),$(LOCAL_PATH)/configs/powerhint.json):$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 
 PRODUCT_SOONG_NAMESPACES += \
     hardware/google/interfaces \
     hardware/google/pixel
-
-endif # !TARGET_IS_TABLET
 
 ifneq ($(TARGET_IS_TABLET),true)
 # Public libraries
@@ -470,7 +467,7 @@ PRODUCT_PACKAGES += \
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    $(if $(filter true,$(TARGET_IS_TABLET)),,$(LOCAL_PATH)) \
+    $(LOCAL_PATH) \
     hardware/xiaomi
 
 ifneq ($(TARGET_IS_TABLET),true)
@@ -541,4 +538,8 @@ ifneq ($(TARGET_COMMON_VENDOR_PRODUCT),)
 $(call inherit-product, $(TARGET_COMMON_VENDOR_PRODUCT))
 else
 $(call inherit-product, vendor/xiaomi/sm8150-common/sm8150-common-vendor.mk)
+endif
+
+ifeq ($(TARGET_IS_TABLET),true)
+$(call inherit-product, device/xiaomi/sm8150-common/tablet/tablet.mk)
 endif

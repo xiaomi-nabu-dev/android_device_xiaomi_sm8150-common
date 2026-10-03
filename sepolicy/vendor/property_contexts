@@ -61,3 +61,7 @@ invn.hal.verbose.                               u:object_r:vendor_sensors_prop:s
 sys.thermal.                                    u:object_r:vendor_thermal_normal_prop:s0
 vendor.sys.thermal.                             u:object_r:vendor_thermal_normal_prop:s0
 persist.sys.thermal.config                      u:object_r:vendor_thermal_normal_prop:s0
+
+# Shared Power HAL tunables; values are supplied by individual devices.
+vendor.powerhal.disp.idle_support u:object_r:vendor_power_prop:s0 exact bool
+vendor.powerhal.interaction. u:object_r:vendor_power_prop:s0 prefix int

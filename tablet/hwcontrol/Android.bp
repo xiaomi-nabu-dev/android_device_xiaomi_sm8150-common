@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: Apache-2.0
+aidl_interface {
+    name: "custom.hardware.hwcontrol",
+    srcs: ["custom/hardware/hwcontrol/*.aidl"],
+    vendor_available: true,
+    unstable: true,
+    backend: {
+        ndk: { enabled: true },
+        cpp: { enabled: true },
+        java: { platform_apis: true },
+    },
+}
+cc_binary {
+    name: "custom.hardware.hwcontrol-service",
+    system_ext_specific: true,
+    srcs: ["service.cpp"],
+    init_rc: ["custom.hardware.hwcontrol.rc"],
+    vintf_fragments: ["custom.hardware.hwcontrol.xml"],
+    shared_libs: ["libbase", "libbinder_ndk", "custom.hardware.hwcontrol-ndk"],
+}

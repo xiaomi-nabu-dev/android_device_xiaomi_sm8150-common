@@ -1,3 +1,11 @@
+soong_config_module_type {
+    name: "sm8150_device_rootdir_sh_binary",
+    module_type: "sh_binary",
+    config_namespace: "XIAOMI_MSMNILE_ROOTDIR",
+    bool_variables: ["DEVICE_ROOTDIR"],
+    properties: ["enabled"],
+}
+
 //
 // Copyright (C) 2022 The LineageOS Project
 //
@@ -17,14 +25,16 @@ sh_binary {
     vendor: true,
 }
 
-sh_binary {
+sm8150_device_rootdir_sh_binary {
     name: "init.qcom.early_boot.sh",
+    soong_config_variables: { DEVICE_ROOTDIR: { enabled: false } },
     src: "bin/init.qcom.early_boot.sh",
     vendor: true,
 }
 
-sh_binary {
+sm8150_device_rootdir_sh_binary {
     name: "init.qcom.post_boot.sh",
+    soong_config_variables: { DEVICE_ROOTDIR: { enabled: false } },
     src: "bin/init.qcom.post_boot.sh",
     vendor: true,
 }
@@ -59,7 +69,8 @@ soong_config_module_type {
     module_type: "prebuilt_etc",
     config_namespace: "XIAOMI_MSMNILE_ROOTDIR",
     variables: ["PARTITION_SCHEME"],
-    properties: ["src"],
+    bool_variables: ["DEVICE_ROOTDIR"],
+    properties: ["src", "enabled"],
 }
 
 soong_config_string_variable {
@@ -70,6 +81,7 @@ soong_config_string_variable {
 xiaomi_msmnile_rootdir_prebuilt_etc {
     name: "fstab.qcom",
     soong_config_variables: {
+        DEVICE_ROOTDIR: { enabled: false },
         PARTITION_SCHEME: {
             dynamic: {
                 src: "etc/fstab_dynamic.qcom",
@@ -86,43 +98,49 @@ xiaomi_msmnile_rootdir_prebuilt_etc {
 }
 
 // Init configuration files
-prebuilt_etc {
+xiaomi_msmnile_rootdir_prebuilt_etc {
     name: "init.qcom.power.rc",
+    soong_config_variables: { DEVICE_ROOTDIR: { enabled: false } },
     src: "etc/init.qcom.power.rc",
     sub_dir: "init/hw",
     vendor: true,
 }
 
-prebuilt_etc {
+xiaomi_msmnile_rootdir_prebuilt_etc {
     name: "init.qcom.rc",
+    soong_config_variables: { DEVICE_ROOTDIR: { enabled: false } },
     src: "etc/init.qcom.rc",
     sub_dir: "init/hw",
     vendor: true,
 }
 
-prebuilt_etc {
+xiaomi_msmnile_rootdir_prebuilt_etc {
     name: "init.qcom.usb.rc",
+    soong_config_variables: { DEVICE_ROOTDIR: { enabled: false } },
     src: "etc/init.qcom.usb.rc",
     sub_dir: "init/hw",
     vendor: true,
 }
 
-prebuilt_etc {
+xiaomi_msmnile_rootdir_prebuilt_etc {
     name: "init.target.rc",
+    soong_config_variables: { DEVICE_ROOTDIR: { enabled: false } },
     src: "etc/init.target.rc",
     sub_dir: "init/hw",
     vendor: true,
 }
 
-prebuilt_etc {
+xiaomi_msmnile_rootdir_prebuilt_etc {
     name: "init.xiaomi.rc",
+    soong_config_variables: { DEVICE_ROOTDIR: { enabled: false } },
     src: "etc/init.xiaomi.rc",
     sub_dir: "init/hw",
     vendor: true,
 }
 
-prebuilt_etc {
+xiaomi_msmnile_rootdir_prebuilt_etc {
     name: "ueventd.qcom.rc",
+    soong_config_variables: { DEVICE_ROOTDIR: { enabled: false } },
     filename: "ueventd.rc",
     src: "etc/ueventd.qcom.rc",
     vendor: true,

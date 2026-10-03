@@ -1,0 +1,22 @@
+<resources>
+    <bool name="config_support_dirac">false</bool>
+    <bool name="config_support_stylus">false</bool>
+    <bool name="config_support_keyboard">false</bool>
+    <bool name="config_support_tap2wake">false</bool>
+    <bool name="config_support_thermal">false</bool>
+    <bool name="config_support_refresh">false</bool>
+    <string name="config_dirac_effect_uuid" translatable="false">00000000-0000-0000-0000-000000000000</string>
+    <string name="config_thermal_node" translatable="false"></string>
+    <string-array name="config_thermal_profile_values" translatable="false">
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </string-array>
+    <integer name="config_refresh_rate_default">60</integer>
+    <integer name="config_refresh_rate_standard">60</integer>
+    <integer name="config_refresh_rate_extreme">60</integer>
+</resources>
