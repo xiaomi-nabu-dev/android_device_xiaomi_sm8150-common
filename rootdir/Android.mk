@@ -1,5 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
+ifneq ($(TARGET_IS_TABLET),true)
+
 include $(CLEAR_VARS)
 LOCAL_MODULE       := fstab.qcom_ramdisk
 LOCAL_MODULE_STEM  := fstab.qcom
@@ -22,3 +24,5 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := etc/init.recovery.qcom.rc
 LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
+
+endif # !TARGET_IS_TABLET

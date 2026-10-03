@@ -150,9 +150,9 @@ TARGET_BOARD_PLATFORM := msmnile
 TARGET_TAP_TO_WAKE_NODE := "/sys/touchpanel/double_tap"
 
 # Properties
-TARGET_ODM_PROP += $(COMMON_PATH)/odm.prop
-TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
-TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
+TARGET_ODM_PROP += $(COMMON_PATH)/odm$(if $(filter true,$(TARGET_IS_TABLET)),-tablet).prop
+TARGET_SYSTEM_PROP += $(COMMON_PATH)/system$(if $(filter true,$(TARGET_IS_TABLET)),-tablet).prop
+TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor$(if $(filter true,$(TARGET_IS_TABLET)),-tablet).prop
 
 # Recovery
 BOARD_INCLUDE_RECOVERY_DTBO := true
