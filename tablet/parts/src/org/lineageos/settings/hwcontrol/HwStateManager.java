@@ -26,10 +26,10 @@ public class HwStateManager {
                 mHwControl = IHwControl.Stub.asInterface(
                         ServiceManager.waitForDeclaredService(IHWCONTROL_AIDL_INTERFACE));
             } catch (Exception e) {
-                if (DEBUG) Log.e(TAG, "Failed to getHwControl()", e);
+                Log.e(TAG, "Failed to getHwControl()", e);
             }
             if (mHwControl == null) {
-                if (DEBUG) Log.e(TAG, "IHwControl AIDL interface not available!");
+                Log.e(TAG, "IHwControl AIDL interface not available!");
             }
         }
     }
@@ -37,12 +37,12 @@ public class HwStateManager {
     // private method to set the state of a hardware control from other classes.
     private static void setHwControl(int hw, int state) {
         if (mHwControl == null) {
-            if (DEBUG) Log.e(TAG, "IHwControl AIDL interface not initialized!, Was BootResetState() called?");
+            Log.e(TAG, "IHwControl AIDL interface not initialized!, Was BootResetState() called?");
         } else {
             try {
                 mHwControl.setHwState(hw, state);
             } catch (Exception e) {
-                if (DEBUG) Log.e(TAG, "Failed to setHw", e);
+                Log.e(TAG, "Failed to setHw type=" + hw + " state=" + state, e);
             }
         }
     }
@@ -54,7 +54,7 @@ public class HwStateManager {
                 if (DEBUG) Log.i(TAG, "IHwControl AIDL interface not initialized!, Attempting to getHwControl()");
                 getHwControl();
             } catch (IOException e) {
-                if (DEBUG) Log.e(TAG, "Failed to getHwControl()", e);
+                Log.e(TAG, "Failed to getHwControl()", e);
             }
         }
         if (mHwControl != null) {
@@ -67,7 +67,7 @@ public class HwStateManager {
         try {
             getHwControl();
         } catch (IOException e) {
-            if (DEBUG) Log.e(TAG, "Failed to getHwControl()", e);
+            Log.e(TAG, "Failed to getHwControl()", e);
         }
     }
 }

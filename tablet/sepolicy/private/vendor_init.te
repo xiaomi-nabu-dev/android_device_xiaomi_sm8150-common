@@ -1,0 +1,2 @@
+# Load the optional tablet node paths from the device's vendor build properties.
+set_prop(vendor_init, sm8150_tablet_config_prop)

@@ -25,7 +25,10 @@ static std::string nodeFor(HwType type) {
 class HwControl final : public BnHwControl {
     ndk::ScopedAStatus getHwState(HwType type, int32_t* result) override {
         std::string path = nodeFor(type), value;
-        if (path.empty()) return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+        if (path.empty()) {
+            LOG(ERROR) << "No configured sysfs node for hardware type " << static_cast<int>(type);
+            return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+        }
         if (!android::base::ReadFileToString(path, &value)) {
             PLOG(ERROR) << "Cannot read " << path;
             return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_STATE);
@@ -35,7 +38,10 @@ class HwControl final : public BnHwControl {
     }
     ndk::ScopedAStatus setHwState(HwType type, int32_t state) override {
         std::string path = nodeFor(type);
-        if (path.empty()) return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+        if (path.empty()) {
+            LOG(ERROR) << "No configured sysfs node for hardware type " << static_cast<int>(type);
+            return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+        }
         if (!android::base::WriteStringToFile(state > 0 ? "1" : "0", path)) {
             PLOG(ERROR) << "Cannot write " << path;
             return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_STATE);
